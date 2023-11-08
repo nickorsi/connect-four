@@ -19,6 +19,10 @@ const board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
+  for (let i = 0; i < HEIGHT; i++){
+    board.push(Array(WIDTH).fill(null));
+    console.log(board);
+  }
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
 }
 
