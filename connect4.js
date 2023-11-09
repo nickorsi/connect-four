@@ -89,7 +89,7 @@ function placeInTable(y, x) {
   const playerPiece = document.createElement("div");
 
 
-  playerPiece.classList.add("piece", `currPlayer-${currPlayer}`);
+  playerPiece.classList.add("piece", `p${currPlayer}`);
 
   playedCell.append(playerPiece);
 }
@@ -108,7 +108,8 @@ function checkForWin() {
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
     for (let [y, x] of cells){
-      if (y > HEIGHT || x > WIDTH || y < 0 || x < 0 || board[y][x] !== currPlayer){
+      console.log(board,"y=", y, "x=", x);
+      if (y > HEIGHT-1 || x > WIDTH-1 || y < 0 || x < 0 || board[y][x] !== currPlayer){
         return false;
       }
     }
@@ -159,6 +160,9 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update global `board` variable with new piece
+  // debugger;
+  board[y][x] = currPlayer;
+  console.log(board[y][x]);
   placeInTable(y, x);
 
   // check for win
@@ -168,9 +172,13 @@ function handleClick(evt) {
 
   // check for tie: if top row is filled, board is filled
   // TODO: check if all cells in board are filled; if so, call endGame
-
+  // debugger;
+  if(board[0].every((cell) => cell !== null)) endGame("Game over, it's a tie!");
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  // debugger;
+  currPlayer = currPlayer === 1 ? 2 : 1;
+  console.log(board[y][x]);
 }
 
 /** Start game. */
