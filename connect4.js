@@ -107,9 +107,13 @@ function checkForWin() {
 
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
-    for (let [y, x] of cells){
+    for (const [y, x] of cells){
       console.log(board,"y=", y, "x=", x);
-      if (y > HEIGHT-1 || x > WIDTH-1 || y < 0 || x < 0 || board[y][x] !== currPlayer){
+      if (y > HEIGHT-1 ||
+          x > WIDTH-1 ||
+          y < 0 ||
+          x < 0 ||
+          board[y][x] !== currPlayer){
         return false;
       }
     }
@@ -128,8 +132,8 @@ function checkForWin() {
 
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       let vert= [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      let diagDL= [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      let diagDR= [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+      let diagDR= [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
+      let diagDL= [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
@@ -162,7 +166,7 @@ function handleClick(evt) {
   // TODO: add line to update global `board` variable with new piece
   // debugger;
   board[y][x] = currPlayer;
-  console.log(board[y][x]);
+  console.log("handleClick", board[y][x]);
   placeInTable(y, x);
 
   // check for win
